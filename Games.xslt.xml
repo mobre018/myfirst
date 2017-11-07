@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:msxsl="urn:schemas-microsoft-com:xslt" exclude-result-prefixes="msxsl"
+>
+    <xsl:output method="html" indent="yes"/>
+
+    <xsl:template match="/">
+
+
+      <html>
+
+        <body>
+          
+          <table border="1" width="100%" cellpadding="5" cellspacing="0">
+
+            <th colspan="3">
+              
+            <xsl:copy-of select="$title1"/>
+            
+            
+            </th>
+             
+            
+            <tr>
+              <xsl:copy-of select="$header"/>
+           
+             
+            </tr>
+              
+                
+          
+             <xsl:apply-templates select="teamscores/season/game"/>
+             
+          
+          
+          </table>
+          
+          
+            
+              <br>
+              </br>
+          <br>
+          </br>
+          
+          
+          <table border="1" width="100%" cellpadding="5" cellspacing="0">
+            <th colspan="3">
+            
+          <xsl:copy-of select="$title2"/>
+            
+            
+            </th>
+             
+            
+            <tr>
+              <xsl:copy-of select="$header"/>
+           
+             
+            </tr>
+          <xsl:apply-templates select="teamscores/season/game[team1 = 'MIA']" />
+        </table>
+          
+        </body>
+        
+        
+        
+        
+      </html>
+      
+      
+       
+    </xsl:template>
+  
+  <!--new template-->
+  
+  <xsl:template match="game">
+  
+     <tr>
+               <td align="center">
+                 
+                 <xsl:value-of select="date"/>
+               </td>
+
+               <td>
+                 <xsl:value-of select="team1"/>  (<xsl:value-of select="team1/@score"/>)
+                 <xsl:if test="team1/@score > team2/@score">
+          *
+          </xsl:if>
+               </td>
+
+               <td>
+                 <xsl:value-of select="team2"/>  (<xsl:value-of select="team2/@score"/>)
+                <xsl:if test="team2/@score > team1/@score">
+          *
+          </xsl:if>
+               </td>
+
+
+             </tr>
+  
+  
+  </xsl:template>
+
+          <xsl:variable name="header">
+            <tr>
+              <th bgcolor="#D5DBDB">Date</th>
+              <th bgcolor="#D5DBDB" >Home</th>
+              <th bgcolor="#D5DBDB">Visitor</th>
+            
+            </tr>
+
+</xsl:variable>
+
+  <xsl:variable name="title1">
+    
+   <h1> 
+                <font color="blue">
+                Basketball Scores, Fall 2017
+                </font>
+              </h1>
+
+  </xsl:variable>
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+        
+          
+          
+            
+            
+            
+            
+          
+          <!--table2-->
+  
+   
+  
+     
+  
+   <xsl:variable name="title2">
+    
+   <h1> 
+                <font color="blue">
+                Home Games at Miami
+                </font>
+              </h1>
+
+  </xsl:variable>
+
+
+
+</xsl:stylesheet>
